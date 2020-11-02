@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>What's the weather like?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <script type="text/javascript">
+        function hide(){
+            document.getElementById('d1').style.display="none";
+            document.getElementById('d2').style.display="none";
+        }
+        function bar(){
+            if(document.getElementById('d2').style.display=="block"){
+                 document.getElementById('d2').style.display="none";
+            }
+            document.getElementById('d1').style.display="block";
+        }
+        function line(){
+            if(document.getElementById('d1').style.display=="block"){
+                 document.getElementById('d1').style.display="none";
+            }
+            document.getElementById('d2').style.display="block";
+        }
+    </script>
+</head>
+
+<body onload="hide()">
+    <section class="hero is-primary" style="background-color:#000;">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    <center>WEATHER FORECAST</center>
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section" >
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <input class="input" name="city" type="text" placeholder="City Name">
+                            </div>
+                            <div class="control" >
+                                <button class="button is-info" style="background-color:#000;">
+                                    Add City
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-2 is-9">
+                    {% for weather in weather_data %}
+                    <div class="box">
+                        <article class="media">
+                            <!--<div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>-->
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                       <!--<span class="title">{{ weather.city }}</span>
+                                        <br>
+                                        <span class="subtitle">Temperature :  {{ weather.temperature }}° F</span><br/>
+                                        <span class="subtitle">Pressure    :  {{ weather.pressure }}</span><br/>
+                                        <span class="subtitle">Humidity   :  {{ weather.humidity }}</span><br/>
+                                        <span class="subtitle">Visibility :  {{ weather.visibility }}</span>
+
+                                        <br> {{ weather.description }}-->
+                                         <br><br><button class="button is-info"  onclick="bar()" style="background-color:#000;float:left;">
+                                            Bar chart
+                                        </button>
+                                        <!--<br>{{weather.model_plot}}-->
+                                        <button class="button is-info"  onclick="line()" style="background-color:#000;float:right;">
+                                            Line chart
+                                        </button>
+                                        <div class="divContainer">
+                                             <div id="d1">{{weather.model_plot}}</div>
+                                             <div id="d2">{{weather.model_plot1}}</div>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
